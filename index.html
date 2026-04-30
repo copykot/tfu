@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Tool</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700&family=Fira+Code:wght@400;500&family=Instrument+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+
+    <script id="template-removal-schema" type="application/kdl">
+field officer_name label="Officer's name"
+
+field entity_kind label="Removal Reason" {
+    "Punishment"
+    "Due to rank"
+}
+
+field old_certification label="Old Certification" {
+    "Recruit Firearms Officer"
+    "Tactical Firearms Officer"
+    "Incident Commander"
+}
+
+field removed label="Removal from TFU?" {
+    "No"
+    "Yes"
+}
+
+showIf removed="Yes" {
+    field blacklist label="Blacklisted from TFU?" {
+        "No"
+        "Yes"
+    }
+
+    showIf blacklist="Yes" {
+        field blacklist_length label="Blacklist Length"
+    }
+}
+showIf entity_kind="Punishment" {
+    showIf removed="No" {
+        field new_certification label="New Certification" {
+            "Recruit Firearms Officer"
+            "Tactical Firearms Officer"
+        }
+    }
+
+    field what_happened label="What Happened"
+
+    field grading label="Grading Level" {
+        "1"
+        "2"
+        "3.1"
+        "3.2"
+    }
+
+    field points label="Points Issued"
+    field expiry_point label="Date of Point Expiry"
+}
+
+showIf entity_kind="Due to rank" {
+    field old_rank label="Previous Rank" {
+        "Senior Officer"
+        "Corporal"
+    }
+}
+    </script>
+    <script class="template" type="text/x-handlebars" title="Removal from X" id="template-removal">
+<p style="text-align: center;">
+    <img src="https://plpd.online/images/swat.png" style="display: block; margin: 0 auto;" width="164" height="164"/><br/>
+    {{#if (eq removed "Yes")}}
+    <b>Removal from Tactical Firearms Unit</b><br/>
+    {{else}}
+    <b>Removal from {{old_certification}}</b><br/>
+    {{/if}}
+    <b>TFU Quality Assurance</b>
+</div>
+
+Hello **{{officer_name}}**,<br/><br/>
+
+{{#if (eq entity_kind "Punishment")}}
+
+{{#if (eq removed "Yes")}}
+This message serves notice of your removal from the Tactical Firearms Unit. This decision wasn't made in a hurry, an in depth investigation and discussion have taken place and TFU Command have deemed your actions do not represent the qualities we expect from our members of this Unit. The reason for this removal is the following:
+{{else}}
+This message serves notice of the removal of your {{old_certification}} certification, following this inbox you will have the {{new_certification}} certification. This decision wasn't made in a hurry, an in depth investigation and discussion have taken place and TFU Command have deemed your actions do not represent the qualities we expect from our TFOs.
+{{/if}}
+<br/><br/>
+
+<b>What happened: **{{what_happened}}**</b><br/>
+<b>Disciplinary grading: **{{grading}}**</b><br/>
+<b>Points issued: **{{points}}**</b><br/>
+<b>Date of point expiry: **{{expiry_point}}**</b>
+{{else}}
+This message serves notice of the removal of your {{old_certification}} certification.
+{{#if (eq removed "Yes")}}
+Following this inbox you will be removed from the Tactical Firearms Unit as you are no longer qualified due to your demotion from {{old_rank}}.
+{{else}}
+Following this inbox your {{old_certification}} certification will be removed as you are no longer qualified due to your demotion from {{old_rank}}.
+{{/if}}
+{{/if}}<br/><br/>
+
+{{#if (eq blacklist "Yes")}}
+Following this decision, you will receive a <b>{{blacklist_length}} blacklist</b> from applying to any role within the Tactical Firearms Unit.<br/><br/>
+{{/if}}
+
+{{#if (eq entity_kind "Due to rank")}}
+Feel free to reapply for the {{old_certification}} application again once you have reached the required qualifications.<br/><br/>
+
+If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it.
+{{else}}
+If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it. If this punishment was decided from an Internal affairs complaint that you are actively disputing, the punishment will remain until the verdict is decided. At which point the decision of the dispute will dictate whether it is removed or not.
+{{/if}}<br/><br/>
+
+<b>Regards,</b><br/>
+Lieutenant Tyler Bounce<br/>
+Staff Sergeant Vina Yin<br/>
+<b>TFU Quality Assurance</b><br/>
+    </script>
+
+    <script id="template-punishment-schema" type="application/kdl">
+field officer_name label="Officer's name"
+
+field what_happened label="What Happened"
+
+field grading label="Grading Level" {
+    "1"
+    "2"
+    "3.1"
+    "3.2"
+}
+
+field points label="Points Issued"
+field expiry_point label="Date of Point Expiry"
+    </script>
+    <script class="template" type="text/x-handlebars" title="Notice of Punishment" id="template-punishment">
+<p style="text-align: center;">
+    <img src="https://plpd.online/images/swat.png" style="display: block; margin: 0 auto;" width="164" height="164"/><br/>
+    <b>Notice of Punishment</b><br/>
+    <b>TFU Quality Assurance</b>
+</div>
+
+Hello **{{officer_name}}**,<br/><br/>
+
+This message serves as a notice of punishment following a recent investigation conducted by the Tactical Firearms Unit Command Team. This decision wasn't made in a hurry, an in depth investigation and discussion have taken place and TFU Command have deemed your actions do not represent the qualities we expect from members of our unit.<br/><br/>
+
+<b>What happened: **{{what_happened}}**</b><br/>
+<b>Disciplinary grading: **{{grading}}**</b><br/>
+<b>Points issued: **{{points}}**</b><br/>
+<b>Date of point expiry: **{{expiry_point}}**</b><br/>
+
+If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it. If this punishment was decided from an Internal affairs complaint that you are actively disputing, the punishment will remain until the verdict is decided. At which point the decision of the dispute will dictate whether it is removed or not.<br/><br/>
+
+<b>Regards,</b><br/>
+Lieutenant Tyler Bounce<br/>
+Staff Sergeant Vina Yin<br/>
+<b>TFU Quality Assurance</b>
+    </script>
+
+    <script id="template-investigation-schema" type="application/kdl">
+field officer_name label="Officer's name"
+
+field is_rtfo label="RTFO?" {
+    "No"
+    "Yes"
+}
+    </script>
+    <script class="template" type="text/x-handlebars" title="Notice of Investigation" id="template-investigation">
+<p style="text-align: center;">
+    <img src="https://plpd.online/images/swat.png" style="display: block; margin: 0 auto;" width="164" height="164"/><br/>
+    <b>Notice of Investigation</b><br/>
+    <b>TFU Quality Assurance</b>
+</div>
+
+Hello **{{officer_name}}**,<br/><br/>
+
+In light of recent events, TFU Command has decided to launch an internal investigation into a situation regarding yourself, alongside an IA that has been created. Thus far, we believe the questions asked within your Internal Affairs statement request, or the questions they are to ask, are sufficient and therefore we won't be asking any further questions at this point in time.
+{{#if (eq is_rtfo "Yes")}}
+During the duration of this investigation your Recruit Tactical Firearms certification will be revoked. If we deem your actions are within policy, the certification will be returned to you.
+{{/if}}
+Once your statement is submitted to your IA, we will take an action independent of the IA if we deem it necessary.<br/><br/>
+
+<b>Regards,</b><br/>
+Lieutenant Tyler Bounce<br/>
+Staff Sergeant Vina Yin<br/>
+<b>TFU Quality Assurance</b>
+    </script>
+
+    <script id="template-activity-schema" type="application/kdl">
+field officer_name label="Officer's name"
+
+field certification label="Certification" {
+    "Tactical Firearms Officer"
+    "Incident Commander"
+}
+
+field strike label="Strike" {
+    "1"
+    "2"
+    "3"
+}
+
+field expiry_point label="Date of Point Expiry"
+    </script>
+    <script class="template" type="text/x-handlebars" title="Activity Warning" id="template-activity">
+<p style="text-align: center;">
+    <img src="https://plpd.online/images/swat.png" style="display: block; margin: 0 auto;" width="164" height="164"/><br/>
+    <b>Activity Warning - Strike {{strike}}</b><br/>
+    <b>TFU Quality Assurance</b>
+</div>
+
+Hello **{{officer_name}}**,<br/><br/>
+
+This message serves as a notice of punishment due to insufficient activity whilst on duty as a {{certification}}. Your punishment is the following:<br/><br/>
+
+<b>Points issued: {{strike}}</b><br/>
+<b>Date of point expiry: {{expiry_point}}</b><br/><br/>
+
+If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it.<br/><br/>
+
+<b>Regards,</b><br/>
+Lieutenant Tyler Bounce<br/>
+Staff Sergeant Vina Yin<br/>
+<b>TFU Quality Assurance</b>
+    </script>
+    
+    <script id="template-ai-schema" type="application/kdl">
+        field officer_name label="Officer's name"
+
+        field question label="Question"
+    </script>
+    <script class="template" type="text/x-handlebars" title="Application Authenticity" id="template-ai">
+<p style="text-align: center;">
+    <img src="https://plpd.online/images/swat.png" style="display: block; margin: 0 auto;" width="164" height="164"/><br/>
+    <b>Application Authenticity</b><br/>
+    <b>TFU Recruitment</b>
+</div>
+
+Hello <b>{{officer_name}}</b>,<br/><br/>
+
+We, the Tactical Firearms Command team, were informed of an anomaly during the grading process of your TFU Application.<br/><br/>
+
+Therefore, the question we want to ask, in which we expect full honesty from you:
+<blockquote>
+{{question}}
+</blockquote><br/><br/>
+
+
+You have the right to refuse providing a statement, however by doing so or failing to provide a statement will likely result in formal punishment being issued from TFU Command.<br/><br/>
+
+You have <b>72 hours</b> to make a decision or provide a statement.<br/><br/>
+
+We expect to hear from you soon.<br/><br/>
+
+<b>Regards,</b><br/>
+Lieutenant Ryan Winters<br/>
+Staff Sergeant Jonathan Gin<br/>
+<b>TFU Recruitment</b>
+    </script>
+    <!-- Templates END. -->
+
+
+
+
+    <style>
+        :root {
+            --bg: #0f1115;
+            --panel: #151922;
+            --panel-2: #1b2130;
+            --text: #e6e6e6;
+            --muted: #9aa4b2;
+            --border: #2a3242;
+            --accent: #6aa6ff;
+            --danger: #ff5c5c;
+            --radius: 10px;
+            --font: "Instrument Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+            --mono: "Fira Code", monospace;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            line-height: 1.5;
+        }
+
+        #app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #app-header {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            background: var(--panel);
+        }
+
+        #template-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        select,
+        input,
+        textarea,
+        button {
+            font: inherit;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--panel-2);
+            color: var(--text);
+            padding: 8px 10px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        input {
+            font-family: var(--font);
+            font-size: 14px;
+        }
+
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        #app-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 16px;
+            flex: 1;
+        }
+
+        #form-container,
+        #output-container {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            overflow: auto;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+            color: var(--muted);
+        }
+
+        .field-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        label {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+            font-family: var(--mono);
+            font-size: 13px;
+        }
+
+        button {
+            cursor: pointer;
+            transition: 0.15s ease;
+            background: var(--accent);
+            border: none;
+            color: #0b0f16;
+            font-weight: 600;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 12px;
+        }
+
+        #rendered-output {
+            font-size: 14px;
+        }
+
+        #rendered-output pre,
+        #rendered-output code {
+            font-family: var(--mono);
+            background: #0b0f16;
+            padding: 2px 4px;
+            border-radius: 6px;
+        }
+
+        #rendered-output blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+            color: var(--muted);
+            margin: 10px 0;
+        }
+
+        @media (max-width: 900px) {
+            #app-body {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="react-body"></div>
+
+
+    <script type="text/babel">
+        function Field({ node, formData, onChange }) {
+            const name = node.values[0];
+
+            if (node.children.length > 0) {
+                return (
+                    <div className="field-container">
+                        <label>{node.properties.label || name}</label>
+                        <select
+                            name={name}
+                            value={formData[name] || ""}
+                            onChange={e => onChange(name, e.target.value)}
+                        >
+                            <option value="">-- Select an option --</option>
+                            {node.children.map(v => (
+                                <option key={v.name} value={v.name}>{v.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                );
+            }
+
+            if (node.properties.multiline === "yes") {
+                return (
+                    <div className="field-container">
+                        <label>{node.properties.label || name}</label>
+                        <textarea id="input-text"
+                            name={name}
+                            value={formData[name] || ""}
+                            onChange={e => onChange(name, e.target.value)}
+                        />
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="field-container">
+                        <label>{node.properties.label || name}</label>
+                        <input
+                            type="text"
+                            name={name}
+                            value={formData[name] || ""}
+                            onChange={e => onChange(name, e.target.value)}
+                        />
+                    </div>
+                );
+            }
+        }
+
+
+        function RenderNode({ node, formData, onChange }) {
+            if (node.name === "field") {
+                return <Field node={node} formData={formData} onChange={onChange} />;
+            }
+
+            if (node.name === "showIf") {
+                const shouldShow = Object.entries(node.properties || {}).every(
+                    ([k, v]) => formData[k] === v
+                );
+
+                if (!shouldShow) return null;
+
+                return node.children.map((child, i) => (
+                    <RenderNode
+                        key={i}
+                        node={child}
+                        formData={formData}
+                        onChange={onChange}
+                    />
+                ));
+            }
+
+            return null;
+        }
+
+
+
+        function App() {
+            const [formData, setFormData] = React.useState({});
+            const [selectedTemplate, setSelectedTemplate] = React.useState(Object.keys(window.templates)[0]);
+            const schema = React.useMemo(() => window.templates[selectedTemplate].schema, [selectedTemplate]);
+            const formIsFilled = React.useMemo(() => {
+                const requiredFields = [];
+                function findRequiredFields(node) {
+                    if (node.name === "field") {
+                        requiredFields.push(node.values[0]);
+                    } else if (node.name === "showIf") {
+                        const shouldShow = Object.entries(node.properties || {}).every(
+                            ([k, v]) => formData[k] === v
+                        );
+                        if (shouldShow)
+                            node.children.forEach(findRequiredFields);
+                    }
+                }
+                schema.output.forEach(findRequiredFields);
+                return requiredFields.every(field => formData[field]);
+            }, [schema, formData]);
+
+
+
+            const renderedOutput = React.useMemo(() => {
+                const template = Handlebars.compile(window.templates[selectedTemplate].content);
+                const rendered = template(formData, { noEscape: true });
+                console.log(rendered);
+                const out = marked.parse(rendered);
+                console.log(out);
+                return {
+                    html: '<meta http-equiv="content-type" content="text/html; charset=utf-8">' + out,
+                    md: rendered
+                }
+            }, [formData, selectedTemplate, formIsFilled]);
+
+
+            function onChange(name, value) {
+                setFormData(prev => ({ ...prev, [name]: value }));
+            }
+
+            async function copyRichText() {
+                if (!navigator.clipboard) {
+                    alert("Clipboard API not supported");
+                    return;
+                }
+
+                try {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            "text/html": new Blob([renderedOutput.html], { type: "text/html" }),
+                            "text/plain": new Blob([renderedOutput.md], { type: "text/plain" })
+                        })
+                    ]);
+                    alert("Rendered output copied to clipboard!");
+                } catch (err) {
+                    console.error("Failed to copy: ", err);
+                    alert("Failed to copy rendered output.");
+                }
+            }
+
+            return (
+                // schema selector, then form, then rendered output
+                <div id="app-container">
+                    <div id="app-header">
+                        <div id="template-selector">
+                            <label htmlFor="template-select">Select template:</label>
+                            <select
+                                id="template-select"
+                                value={selectedTemplate}
+                                onChange={e => setSelectedTemplate(e.target.value)}
+                            >
+                                {Object.keys(window.templates).map(templateName => (
+                                    <option key={templateName} value={templateName}>
+                                        {templateName}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div id="app-body">
+                        <div id="form-container">
+                            <h2>Form</h2>
+                            {!formIsFilled && <p style={{ color: "red" }}>Form is not entirely filled.</p>}
+
+                            {schema.output.map((node, i) => (
+                                <RenderNode
+                                    key={i}
+                                    node={node}
+                                    formData={formData}
+                                    onChange={onChange}
+                                />
+                            ))}
+                        </div>
+
+                        <div id="output-container">
+                            <div id="buttons-container">
+                                <button onClick={copyRichText}>
+                                    Copy Rendered Output
+                                </button>
+                            </div>
+                            <div id="rendered-output">
+                                <div dangerouslySetInnerHTML={{ __html: renderedOutput.html }} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("react-body"))
+            .render(<App />);
+    </script>
+
+    <script type="module">
+        import { parse } from "https://esm.sh/kdljs@0.3.0";
+
+        // Discover all templates
+        let templates = {};
+        document.querySelectorAll("script.template").forEach(templateScript => {
+            const templateName = templateScript.getAttribute("title");
+            const templateContent = templateScript.innerHTML;
+            const templateSchemaScript = document.getElementById(templateScript.getAttribute("id") + "-schema");
+            const templateSchema = parse(templateSchemaScript.innerHTML);
+            console.log(templateSchema);
+            templates[templateName] = {
+                content: templateContent,
+                schema: templateSchema
+            };
+        });
+
+        window.templates = templates;
+
+        Handlebars.registerHelper("eq", function (arg1, arg2) {
+            return arg1 === arg2;
+        });
+
+        Handlebars.registerHelper("neq", function (arg1, arg2) {
+            return arg1 !== arg2;
+        });
+
+        Handlebars.registerHelper("and", function (...args) {
+            return args.slice(0, -1).every(Boolean);
+        });
+
+        Handlebars.registerHelper("nand", function (...args) {
+            return !args.slice(0, -1).every(Boolean);
+        });
+
+
+        Handlebars.registerHelper("or", function (...args) {
+            return args.slice(0, -1).some(Boolean);
+        });
+
+    </script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4ce6a61abdab4eeba4caca88b8eee22b","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+
+</html>
