@@ -321,7 +321,14 @@ This is an 'informal warning'. Please remember that we don't keep this on record
 I need to know your thoughts on what has been discussed above. I also need you to let me know if there is anything or anybody that may be responsible for unsatisfactory performance. I will try my best to support you.<br/><br/>
 
 <b>Regards,</b><br/>
-{{sender_rank}} {{sender_name}}
+{{sender_rank}} {{sender_name}}<br/>
+{{#if (eq sender_rank "Captain")}}
+Head of Tactical Firearms
+{{else if (eq sender_rank "Lieutenant")}}
+Tactical Firearms Command
+{{else if (eq sender_rank "Staff Sergeant")}}
+Tactical Firearms Junior Command
+{{/if}}
 </div>
 
     </script>
@@ -371,7 +378,14 @@ I need to know your thoughts on what has been discussed above. I also need you t
 Please remember that this may remain active on your record as an infraction for 3/6 months. If you wish to appeal the warning, you may do so by submitting a helpdesk ticket to Professional Standards or the Chiefs of Department.<br/><br/>
 
 <b>Regards,</b><br/>
-{{sender_rank}} {{sender_name}}
+{{sender_rank}} {{sender_name}}<br/>
+{{#if (eq sender_rank "Captain")}}
+Head of Tactical Firearms
+{{else if (eq sender_rank "Lieutenant")}}
+Tactical Firearms Command
+{{else if (eq sender_rank "Staff Sergeant")}}
+Tactical Firearms Junior Command
+{{/if}}
 </div>
 
     </script>
