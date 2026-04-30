@@ -56,7 +56,6 @@ showIf entity_kind="Punishment" {
         "3.2"
     }
 
-    field points label="Points Issued"
     field expiry_point label="Date of Point Expiry"
 }
 
@@ -71,9 +70,17 @@ showIf entity_kind="Due to rank" {
 <p style="text-align: center;">
     <img src="https://plpd.online/images/swat.png" style="display: block; margin: 0 auto;" width="164" height="164"/><br/>
     {{#if (eq removed "Yes")}}
-    <b>Removal from Tactical Firearms Unit</b><br/>
+    <b>Removal from TFU</b><br/>
     {{else}}
-    <b>Removal from {{old_certification}}</b><br/>
+    <b>Removal from
+        {{#if (eq old_certification "Incident Commander")}}
+            TFIC
+        {{else if (eq old_certification "Tactical Firearms Officer")}}
+            TFO
+        {{else}}
+            RTFO
+        {{/if}}
+    </b><br/>
     {{/if}}
     <b>TFU Quality Assurance</b>
 </div>
@@ -91,7 +98,17 @@ This message serves notice of the removal of your {{old_certification}} certific
 
 <b>What happened: **{{what_happened}}**</b><br/>
 <b>Disciplinary grading: **{{grading}}**</b><br/>
-<b>Points issued: **{{points}}**</b><br/>
+<b>Points issued:
+{{#if (eq grading "1")}}
+1
+{{else if (eq grading "2")}}
+2
+{{else if (eq grading "3.1")}}
+3.1
+{{else}}
+3.2
+{{/if}}
+</b><br/>
 <b>Date of point expiry: **{{expiry_point}}**</b>
 {{else}}
 This message serves notice of the removal of your {{old_certification}} certification.
@@ -132,7 +149,6 @@ field grading label="Grading Level" {
     "3.2"
 }
 
-field points label="Points Issued"
 field expiry_point label="Date of Point Expiry"
     </script>
     <script class="template" type="text/x-handlebars" title="Notice of Punishment" id="template-punishment">
@@ -148,7 +164,17 @@ This message serves as a notice of punishment following a recent investigation c
 
 <b>What happened: **{{what_happened}}**</b><br/>
 <b>Disciplinary grading: **{{grading}}**</b><br/>
-<b>Points issued: **{{points}}**</b><br/>
+<b>Points issued:
+{{#if (eq grading "1")}}
+1
+{{else if (eq grading "2")}}
+2
+{{else if (eq grading "3.1")}}
+3.1
+{{else}}
+3.2
+{{/if}}
+</b><br/>
 <b>Date of point expiry: **{{expiry_point}}**</b><br/>
 
 If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it. If this punishment was decided from an Internal affairs complaint that you are actively disputing, the punishment will remain until the verdict is decided. At which point the decision of the dispute will dictate whether it is removed or not.<br/><br/>
