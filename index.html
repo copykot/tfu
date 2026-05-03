@@ -85,7 +85,7 @@ showIf entity_kind="Due to rank" {
     <b>TFU Quality Assurance</b>
 </div>
 
-Hello **{{officer_name}}**,<br/><br/>
+Hello **{{officer_name}}**,<br/>
 
 {{#if (eq entity_kind "Punishment")}}
 
@@ -158,7 +158,7 @@ field expiry_point label="Date of Point Expiry"
     <b>TFU Quality Assurance</b>
 </div>
 
-Hello **{{officer_name}}**,<br/><br/>
+Hello **{{officer_name}}**,<br/>
 
 This message serves as a notice of punishment following a recent investigation conducted by the Tactical Firearms Unit Command Team. This decision wasn't made in a hurry, an in depth investigation and discussion have taken place and TFU Command have deemed your actions do not represent the qualities we expect from members of our unit.<br/><br/>
 
@@ -200,7 +200,7 @@ field is_rtfo label="RTFO?" {
     <b>TFU Quality Assurance</b>
 </div>
 
-Hello **{{officer_name}}**,<br/><br/>
+Hello **{{officer_name}}**,<br/>
 
 In light of recent events, TFU Command has decided to launch an internal investigation into a situation regarding yourself, alongside an IA that has been created. Thus far, we believe the questions asked within your Internal Affairs statement request, or the questions they are to ask, are sufficient and therefore we won't be asking any further questions at this point in time.
 {{#if (eq is_rtfo "Yes")}}
@@ -248,7 +248,7 @@ field expiry_point label="Date of Point Expiry"
     <b>TFU Quality Assurance</b>
 </div>
 
-Hello **{{officer_name}}**,<br/><br/>
+Hello **{{officer_name}}**,<br/>
 
 {{#if (eq strike "3")}}
 This message serves as a formal notice of disciplinary action due to insufficient activity while on duty as a {{certification}}. As this marks your third and final point of contact regarding this issue, it has resulted in your demotion from the {{certification}} certification to the {{new_certification}} certification.<br/><br/>
@@ -302,6 +302,8 @@ Staff Sergeant Jonathan Gin<br/>
     </script>
 
     <script id="template-lets-talk-schema" type="application/kdl">
+field officer_name label="Officer's name"
+
 field area label="Performance area(s) for review"
 
 field improvement label="Considerations for improvement"
@@ -322,6 +324,8 @@ field sender_name label="Sender name"
     <b>Let's Talk</b><br/>
     <b>Tactical Firearms Unit</b>
 </div>
+
+Hello **{{officer_name}}**,<br/>
 
 This is an 'informal warning'. Please remember that we don't keep this on record, and that it is simply a measure used to, in partnership, avoid escalation of performance related matters, and ensure that everything is on the right track!<br/><br/>
 
@@ -349,6 +353,8 @@ Tactical Firearms Junior Command
     </script>
 
     <script id="template-warning-schema" type="application/kdl">
+field officer_name label="Officer's name"
+
 field warning_type label="First/Final" {
     "First"
     "Final"
@@ -374,6 +380,8 @@ field sender_name label="Sender name"
     <b>{{written_warning}} Written Warning</b><br/>
     <b>Tactical Firearms Unit</b>
 </div>
+
+Hello **{{officer_name}}**,<br/>
 
 This is a 'written warning'. It has been identified that your performance must improve, and it is hoped that this measure will encourage you to take steps towards better performance.<br/><br/>
 
