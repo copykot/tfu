@@ -1,0 +1,16 @@
+{
+    "imports": {
+        "marked": "https://esm.sh/marked",
+        "kdljs": "https://esm.sh/kdljs@0.3.0",
+        "handlebars": "https://esm.sh/handlebars@4.7.9?target=es2020",
+        "esbuild": "https://deno.land/x/esbuild@v0.28.0/mod.js",
+        "react": "npm:react@18",
+        "react-dom": "npm:react-dom@18",
+        "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader",
+        "std": "jsr:@std"
+    },
+
+    "tasks": {
+        "build": "deno run -A build.js"
+    }
+}

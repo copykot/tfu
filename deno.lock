@@ -1,0 +1,98 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@luca/esbuild-deno-loader@*": "0.11.1",
+    "jsr:@std/bytes@^1.0.2": "1.0.6",
+    "jsr:@std/encoding@^1.0.5": "1.0.10",
+    "jsr:@std/fs@*": "1.0.23",
+    "jsr:@std/internal@^1.0.12": "1.0.13",
+    "jsr:@std/path@^1.0.6": "1.1.4",
+    "npm:react-dom@18": "18.3.1_react@18.3.1",
+    "npm:react@18": "18.3.1"
+  },
+  "jsr": {
+    "@luca/esbuild-deno-loader@0.11.1": {
+      "integrity": "dc020d16d75b591f679f6b9288b10f38bdb4f24345edb2f5732affa1d9885267",
+      "dependencies": [
+        "jsr:@std/bytes",
+        "jsr:@std/encoding",
+        "jsr:@std/path"
+      ]
+    },
+    "@std/bytes@1.0.6": {
+      "integrity": "f6ac6adbd8ccd99314045f5703e23af0a68d7f7e58364b47d2c7f408aeb5820a"
+    },
+    "@std/encoding@1.0.10": {
+      "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
+    },
+    "@std/fs@1.0.23": {
+      "integrity": "3ecbae4ce4fee03b180fa710caff36bb5adb66631c46a6460aaad49515565a37"
+    },
+    "@std/internal@1.0.13": {
+      "integrity": "2f9546691d4ac2d32859c82dff284aaeac980ddeca38430d07941e7e288725c0"
+    },
+    "@std/path@1.1.4": {
+      "integrity": "1d2d43f39efb1b42f0b1882a25486647cb851481862dc7313390b2bb044314b5",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    }
+  },
+  "npm": {
+    "js-tokens@4.0.0": {
+      "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
+    },
+    "loose-envify@1.4.0": {
+      "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+      "dependencies": [
+        "js-tokens"
+      ],
+      "bin": true
+    },
+    "react-dom@18.3.1_react@18.3.1": {
+      "integrity": "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==",
+      "dependencies": [
+        "loose-envify",
+        "react",
+        "scheduler"
+      ]
+    },
+    "react@18.3.1": {
+      "integrity": "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==",
+      "dependencies": [
+        "loose-envify"
+      ]
+    },
+    "scheduler@0.23.2": {
+      "integrity": "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==",
+      "dependencies": [
+        "loose-envify"
+      ]
+    }
+  },
+  "redirects": {
+    "https://esm.sh/chevrotain@^11.0.3?target=denonext": "https://esm.sh/chevrotain@11.2.0?target=denonext"
+  },
+  "remote": {
+    "https://deno.land/x/denoflate@1.2.1/mod.ts": "f5628e44b80b3d80ed525afa2ba0f12408e3849db817d47a883b801f9ce69dd6",
+    "https://deno.land/x/denoflate@1.2.1/pkg/denoflate.js": "b9f9ad9457d3f12f28b1fb35c555f57443427f74decb403113d67364e4f2caf4",
+    "https://deno.land/x/denoflate@1.2.1/pkg/denoflate_bg.wasm.js": "d581956245407a2115a3d7e8d85a9641c032940a8e810acbd59ca86afd34d44d",
+    "https://deno.land/x/esbuild@v0.28.0/mod.js": "ed5c47ee39cdee835df395b26a35259bc16757a07c91acac5825dcbf5e39281b",
+    "https://esm.sh/@chevrotain/cst-dts-gen@11.2.0/denonext/cst-dts-gen.mjs": "e80f5ca07e2abe3bb9f26a114673fdf272be4f1f1b6e09672960cc464d12e0e1",
+    "https://esm.sh/@chevrotain/gast@11.2.0/denonext/gast.mjs": "a5ece1f580090fc0d2deefb35bd8977528b21c1b9f1fd6e6b4bb05fe401ccfe9",
+    "https://esm.sh/@chevrotain/regexp-to-ast@11.2.0/denonext/regexp-to-ast.mjs": "522167a4075c5b39d971a3a9b7496acdc57771307842c8d42dfd56219c7f8ef2",
+    "https://esm.sh/@chevrotain/utils@11.2.0/denonext/utils.mjs": "c277e3fc1b8117811bedf593b9894f5c9b1a0866e2d82e0b3b4a68c1d5ad14a2",
+    "https://esm.sh/chevrotain@11.2.0/denonext/chevrotain.mjs": "669cda3410f801239e8eac3e1a009ce134e9779b10de0699f02215e841b55df1",
+    "https://esm.sh/chevrotain@11.2.0?target=denonext": "e169305835f419a501f6b1aabbace06bb53cc3e8cc0fa45869c8d167b330ae4c",
+    "https://esm.sh/kdljs@0.3.0": "c989165dbf84747dd777193219e624ae2a64cfb67b91c1a97ea0a411a6097259",
+    "https://esm.sh/kdljs@0.3.0/denonext/kdljs.mjs": "59f223d03633c6832a1587e6f7f63da5feee54cc11ab250c4e7708a5486a6c8d",
+    "https://esm.sh/lodash-es@4.17.23/denonext/lodash-es.mjs": "9e6533947143891a573f70f03ed5e9e12515c866fecdc0c54789b33655591b83"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@luca/esbuild-deno-loader@*",
+      "npm:react-dom@18",
+      "npm:react@18"
+    ]
+  }
+}
