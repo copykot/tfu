@@ -49,3 +49,5 @@ showIf entity_kind="Punishment" {
 showIf entity_kind="Due to rank" {
     field old_rank label="Previous Rank"
 }
+
+field sender label="Sender" sender="yes"

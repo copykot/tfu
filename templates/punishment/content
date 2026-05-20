@@ -25,6 +25,6 @@ This message serves as a notice of punishment following a recent investigation c
 If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it. If this punishment was decided from an Internal affairs complaint that you are actively disputing, the punishment will remain until the verdict is decided. At which point the decision of the dispute will dictate whether it is removed or not.<br/><br/>
 
 <b>Regards,</b><br/>
-Lieutenant Tyler Bounce<br/>
-Staff Sergeant Vina Yin<br/>
-<b>TFU Quality Assurance</b>
+{{sender_rank}} {{sender_name}}<br/>
+{{sender_role}}<br/>
+

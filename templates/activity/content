@@ -22,6 +22,5 @@ This message serves as a notice of punishment due to insufficient activity whils
 If you wish to dispute this disciplinary action, you may do so by directing a helpdesk to TFU and the Head of TFU will deal with it.<br/><br/>
 
 <b>Regards,</b><br/>
-Lieutenant Tyler Bounce<br/>
-Staff Sergeant Vina Yin<br/>
-<b>TFU Quality Assurance</b>
+{{sender_rank}} {{sender_name}}<br/>
+{{sender_role}}

@@ -252,8 +252,7 @@ function App() {
             </div>
             <div id="app-body">
                 <div id="form-container">
-                    <h2>Form</h2>
-                    {!formIsFilled && <p style={{ color: "red" }}>Form is not entirely filled.</p>}
+                    {formIsFilled && <h2>Form</h2> || <h2 style={{ color: "red" }}>Form is not entirely filled</h2>}
 
                     {schema.output.map((node, i) => (
                         <RenderNode

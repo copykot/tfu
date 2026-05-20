@@ -19,3 +19,5 @@ showIf strike="3" {
 }
 
 field expiry_point label="Date of Point Expiry"
+
+field sender label="Sender" sender="yes"
