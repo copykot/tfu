@@ -11,6 +11,7 @@
     },
 
     "tasks": {
-        "build": "deno run -A build.js"
+        "build": "deno run -A build.js",
+        "dev": "deno run -A build.js --watch"
     }
 }

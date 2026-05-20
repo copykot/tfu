@@ -50,3 +50,20 @@ async function build() {
 }
 
 await build();
+
+
+if (Deno.args.includes("--watch")) {
+    const watcher = Deno.watchFs(["./templates", "./index.jsx", "./index.html", "./index.css"])
+
+    let timer = null;
+    for await (const event of watcher) {
+        clearTimeout(timer);
+
+        timer = setTimeout(async () => {
+            console.log("Rebuilding")
+
+            await build();
+        }, 100);
+    }
+}
+

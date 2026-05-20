@@ -169,7 +169,7 @@ function usePeople() {
         load();
     }, []);
 
-    return { people };
+    return people;
 }
 
 function App() {
@@ -193,13 +193,13 @@ function App() {
         return requiredFields.every(field => formData[field]);
     }, [schema, formData]);
 
-    const { people } = usePeople();
+    const people = usePeople();
 
     const renderedOutput = React.useMemo(() => {
         const template = Handlebars.compile(templates[selectedTemplate].content);
         const rendered = template(formData, { noEscape: true });
         const out = marked.parse(rendered);
-        console.log(out);
+        // console.log(out);
         return {
             html: '<meta http-equiv="content-type" content="text/html; charset=utf-8">' + out,
             md: rendered
@@ -281,4 +281,4 @@ function App() {
 }
 
 
-createRoot(document.getElementById("react-body")).render(<App />);
+createRoot(document.getElementById("react-body")).render(<App/>);
