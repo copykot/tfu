@@ -26,21 +26,21 @@ async function buildTemplates() {
         }
     }
 
-    await Deno.writeTextFile("./build/templates.json", JSON.stringify(templates, null, 4));
+    await Deno.writeTextFile("./docs/templates.json", JSON.stringify(templates, null, 4));
 }
 
 async function build() {
-    await Deno.mkdir("./build/", { recursive: true });
+    await Deno.mkdir("./docs/", { recursive: true });
 
     await buildTemplates();
 
-    await Deno.copyFile("./index.css", "./build/index.css");
-    await Deno.copyFile("./index.html", "./build/index.html");
+    await Deno.copyFile("./index.css", "./docs/index.css");
+    await Deno.copyFile("./index.html", "./docs/index.html");
 
     const b = await esbuild.build({
         plugins: [...denoPlugins()],
         entryPoints: ["./index.jsx"],
-        outfile: "./build/index.js",
+        outfile: "./docs/index.js",
         bundle: true,
         format: "esm",
         jsx: "automatic",

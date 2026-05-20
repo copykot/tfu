@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 import React from "react";
 import Handlebars from "handlebars"
 import { marked } from "marked";
-import templates from "./build/templates.json" with { type: "json" };
+import templates from "./docs/templates.json" with { type: "json" };
 
 Handlebars.registerHelper("eq", function (arg1, arg2) {
     return arg1 === arg2;
