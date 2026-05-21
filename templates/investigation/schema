@@ -1,8 +1,8 @@
-field officer_name label="Officer's name"
+inherit "default"
 
 field is_rtfo label="RTFO?" {
     "No"
     "Yes"
 }
 
-field sender label="Sender" sender="yes"
+inherit "sender"

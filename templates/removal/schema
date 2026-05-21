@@ -1,4 +1,4 @@
-field officer_name label="Officer's name"
+inherit "default"
 
 field entity_kind label="Removal Reason" {
     "Punishment"
@@ -50,4 +50,4 @@ showIf entity_kind="Due to rank" {
     field old_rank label="Previous Rank"
 }
 
-field sender label="Sender" sender="yes"
+inherit "sender"

@@ -1,5 +1,5 @@
-field officer_name label="Officer's name"
+inherit "default"
 
-field question label="Question"
+field question label="Question" multiline="yes"
 
-field sender label="Sender" sender="yes"
+inherit "sender"

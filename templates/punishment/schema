@@ -1,4 +1,4 @@
-field officer_name label="Officer's name"
+inherit "default"
 
 field what_happened label="What Happened"
 
@@ -11,4 +11,4 @@ field grading label="Grading Level" {
 
 field expiry_point label="Date of Point Expiry"
 
-field sender label="Sender" sender="yes"
+inherit "sender"

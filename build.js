@@ -4,6 +4,8 @@ import * as esbuild from "esbuild";
 import { denoPlugins } from "@luca/esbuild-deno-loader";
 
 const template_names = {
+	"default": "default",
+	"sender": "sender",
     "removal": "Removal from X",
     "punishment": "Notice of Punishment",
     "investigation": "Notice of Investigation",
@@ -12,7 +14,12 @@ const template_names = {
     "lets-talk": "Let's Talk",
     "warning": "First/Final Written Warning",
     "blacklist": "Notice of Blacklist",
-}
+};
+
+const hidden = {
+	"default": true,
+	"sender": true
+};
 
 async function buildTemplates() {
     let templates = {}
@@ -22,8 +29,9 @@ async function buildTemplates() {
 
         templates[title] = {
             content: content,
-            schema: schema
-        }
+            schema: schema,
+			hidden: hidden[name],
+        };
     }
 
     await Deno.writeTextFile("./docs/templates.json", JSON.stringify(templates, null, 4));

@@ -1,0 +1,4 @@
+field badge_number label="Badge/SteamID (auto-completes fields)" badge="yes" required="no"
+
+field officer_name label="Officer's name"
+

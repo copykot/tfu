@@ -70,8 +70,27 @@ function SenderField({ node, formData, onChange, people }) {
     )
 }
 
-function Field({ node, formData, onChange, people }) {
+function Field({ node, formData, onChange, people, employees }) {
     const name = node.values[0];
+
+	let changeFunction = (e) => { onChange(name, e.target.value) };
+	if (node.properties.badge === "yes") {
+		changeFunction = (e) => {
+			const value = e.target.value;
+			onChange(name, value);
+
+			const badge = Number(value);
+			for (const e of employees) {
+				if (e.badgeNumber === badge || e.communityId === value) {
+					onChange("officer_name", `${e.nick}`);
+					onChange("recipient_rank", `${e.displayName}`);
+					onChange("recipient_rp", `${e.rpName}`);
+
+					break;
+				}
+			}
+		}
+	}
 
     if (node.properties.sender === "yes") {
         return <SenderField node={node} formData={formData} onChange={onChange} people={people}/>;
@@ -114,7 +133,7 @@ function Field({ node, formData, onChange, people }) {
                     type="text"
                     name={name}
                     value={formData[name] || ""}
-                    onChange={e => onChange(name, e.target.value)}
+                    onChange={changeFunction}
                 />
             </div>
         );
@@ -122,9 +141,30 @@ function Field({ node, formData, onChange, people }) {
 }
 
 
-function RenderNode({ node, formData, onChange, people }) {
+function RenderNode({ node, formData, onChange, people, employees }) {
+	if (node.name === "inherit") {
+		const templateName = node.values[0];
+
+		if (templates[templateName]) {
+			const template = templates[templateName].schema;
+
+			return template.output.map((child, i) => (
+				<RenderNode
+					key={i}
+					node={child}
+					formData={formData}
+					onChange={onChange}
+					people={people}
+					employees={employees}
+				/>
+			));
+		}
+
+		return null;
+	}
+
     if (node.name === "field") {
-        return <Field node={node} formData={formData} onChange={onChange} people={people}/>;
+        return <Field node={node} formData={formData} onChange={onChange} people={people} employees={employees}/>;
     }
 
     if (node.name === "showIf") {
@@ -141,6 +181,7 @@ function RenderNode({ node, formData, onChange, people }) {
                 formData={formData}
                 onChange={onChange}
                 people={people}
+				employees={employees}
             />
         ));
     }
@@ -172,19 +213,45 @@ function usePeople() {
     return people;
 }
 
+function useEmployees() {
+	const [employees, setEmployees] = React.useState({});
+
+	React.useEffect(() => {
+		async function load() {
+			const res = await fetch("https://api.a1larsen.de/api/employees");
+			const data = await res.json();
+
+			setEmployees(data);
+		}
+
+		load();
+	}, []);
+
+	return employees;
+}
+
 function App() {
+	const keys = Object.keys(templates).filter((e) => {
+		return !templates[e].hidden;
+	});
+
     const [formData, setFormData] = React.useState({});
-    const [selectedTemplate, setSelectedTemplate] = React.useState(Object.keys(templates)[0]);
+    const [selectedTemplate, setSelectedTemplate] = React.useState(keys[0]);
     const schema = React.useMemo(() => templates[selectedTemplate].schema, [selectedTemplate]);
     const formIsFilled = React.useMemo(() => {
         const requiredFields = [];
         function findRequiredFields(node) {
+			if (node.properties.required === "no") {
+				return;
+			}
+
             if (node.name === "field") {
                 requiredFields.push(node.values[0]);
             } else if (node.name === "showIf") {
                 const shouldShow = Object.entries(node.properties || {}).every(
                     ([k, v]) => formData[k] === v
                 );
+
                 if (shouldShow)
                     node.children.forEach(findRequiredFields);
             }
@@ -194,12 +261,13 @@ function App() {
     }, [schema, formData]);
 
     const people = usePeople();
+    const employees = useEmployees();
 
     const renderedOutput = React.useMemo(() => {
         const template = Handlebars.compile(templates[selectedTemplate].content);
         const rendered = template(formData, { noEscape: true });
         const out = marked.parse(rendered);
-        // console.log(out);
+
         return {
             html: '<meta http-equiv="content-type" content="text/html; charset=utf-8">' + out,
             md: rendered
@@ -242,7 +310,7 @@ function App() {
                         value={selectedTemplate}
                         onChange={e => setSelectedTemplate(e.target.value)}
                     >
-                        {Object.keys(templates).map(templateName => (
+                        {keys.map(templateName => (
                             <option key={templateName} value={templateName}>
                                 {templateName}
                             </option>
@@ -261,6 +329,7 @@ function App() {
                             formData={formData}
                             onChange={onChange}
                             people={people}
+							employees={employees || {}}
                         />
                     ))}
                 </div>
