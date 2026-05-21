@@ -14,6 +14,7 @@ const template_names = {
     "lets-talk": "Let's Talk",
     "warning": "First/Final Written Warning",
     "blacklist": "Notice of Blacklist",
+    "suspension": "Notice of Suspension",
 };
 
 const hidden = {

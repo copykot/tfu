@@ -1,0 +1,40 @@
+<p style="text-align: center;">
+    <img src="https://files.perpheads.com/iEWlfeel37wZ1H7t.png" width="inherit" height="inherit"><br/>
+    PARALAKE POLICE DEPARTMENT<br/>
+    <b>NOTICE OF SUSPENSION PENDING DISPOSITION</b><br/>
+</p>
+
+<p style="text-align: center;">This is your formal notice of suspension pending disposition, recent actions have shown that you are or can be a danger to others if you remain on active duty. You are suspended indefinitely starting from the time of this conversation. You are not allowed to go on-duty while you are suspended you are also not allowed to perform any duties within the Police Department while being suspended. Internal Affairs will remove your suspension when the investigation is completed.<br/></p>
+
+<p style="text-align: center;">Internal Affairs will be in contact with you shortly, they will be looking into the evidence provided by the Supervisor who has reported you and they will most likely request a statement from you.<br/><br/></p>
+
+<h3>Information</h3>
+<b>Officer Name: {{officer_name}}<br/>
+Officer Rank: {{recipient_rank}}<br/><br/>
+    
+Supervisor Name: {{sender}}<br/>
+Supervisor Rank: {{sender_rank}}<br/>
+
+Is an immediate suspension necessary to maintain safety, health, order or effective direction of public services (Y/N): Y<br/>
+
+Time & Date Suspension Enacted: {{suspension_time}}</b><br/><br/>
+
+<h3>Details of Incident</h3>
+<b>Alleged Misconduct Classification: {{misconduct}}<br/><br/>
+
+Date of Incident: {{incident_date}}<br/>
+Time of Incident: {{incident_time}}<br/>
+Location of Incident: {{incident_location}}<br/><br/>
+
+Explanation of Incident: {{incident_explanation}}</b>
+
+<h3>Frequently Asked Questions:</h3>
+
+<b>What is a suspension?</b><br/>
+A suspension is a temporal removal from duties that is issued by a supervisor pending further investigation. This is not a punishment, simply a means of preventing any further issues.<br/><br/>
+
+<b>What happens after I have been suspended?</b><br/>
+A PM is made informing you of your suspension with a time, date and location of a incident that a supervisor believes was gross misconduct. A member of the internal affairs investigation team will begin gathering evidence and will ask you for a statement regarding the incident.<br/><br/>
+
+<b>Can I dispute a suspension?</b><br/>
+A suspension is not a punishment and there is no need to dispute it. A member of IA will look over the alleged incident and you will be notified on what is happening from then. You will be notified when the suspension has been lifted.

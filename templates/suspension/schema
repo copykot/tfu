@@ -1,0 +1,31 @@
+inherit "default"
+
+field recipient_rank label="Officer's Rank"
+
+inherit "sender"
+
+field suspension_time label="Time & Date Suspension Enacted"
+
+field misconduct label="Alleged Misconduct Classification" {
+    "01 - Discourtesy"
+    "02 - Traffic Offences"
+    "03 - Policy / SOP Violation"
+    "04 - Unlawful Charge"
+    "05 - Unlawful Entry"
+    "06 - Unlawful Search"
+    "07 - Insubordination"
+    "08 - Failure to Report Misconduct"
+    "09 - Dishonesty"
+    "10 - Excessive Force"
+    "11 - Shooting Violation"
+    "12 - Criminal Activity"
+    "13 - Duty of Care"
+}
+
+field incident_date label="Date of Incident"
+
+field incident_time label="Time of Incident"
+
+field incident_location label="Location of Incident"
+
+field incident_explanation label="Explanation of Incident"
