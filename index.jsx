@@ -121,7 +121,7 @@ function Field({ node, formData, onChange, people, employees }) {
 				<textarea id="input-text"
 					name={name}
 					value={formData[name] || ""}
-					onChange={e => onChange(name, e.target.value)}
+					onChange={changeFunction}
 				/>
 			</div>
 		);
@@ -140,6 +140,50 @@ function Field({ node, formData, onChange, people, employees }) {
 	}
 }
 
+function getOrdinal(n) {
+	if (n > 3 && n < 21) return 'th';
+
+	switch (n % 10) {
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
+	}
+}
+
+function DateNode({ node, formData, onChange }) {
+	const name = node.values[0];
+
+	function handleDateChange(e) {
+		const start = new Date(e.target.value);
+
+		const output = [];
+		for (let i = 0; i < 4; i++) {
+			const current = new Date(start);
+			current.setDate(start.getDate() + i);
+
+			const weekday = current.toLocaleDateString("en-GB", { weekday: "long" });
+			const day = current.getDate();
+
+			output.push(`- ${weekday} ${day}${getOrdinal(day)} @ 6PM BST`);
+			output.push(`- ${weekday} ${day}${getOrdinal(day)} @ 7PM BST`);
+		}
+
+		onChange(name, output.join("\n"));
+	}
+
+	return (
+		<div className="field-container">
+			<label>{node.properties.label || name}</label>
+			<input
+				type="date"
+				name={name}
+				value={formData[name] || ""}
+				onChange={handleDateChange}
+			/>
+		</div>
+	);
+}
 
 function RenderNode({ node, formData, onChange, people, employees }) {
 	if (node.name === "inherit") {
@@ -161,6 +205,10 @@ function RenderNode({ node, formData, onChange, people, employees }) {
 		}
 
 		return null;
+	}
+
+	if (node.name === "date") {
+		return <DateNode node={node} formData={formData} onChange={onChange}/>
 	}
 
 	if (node.name === "field") {
@@ -244,7 +292,7 @@ function App() {
 		function findRequiredFields(node) {
 			if (node.properties.required === "no") {
 				return;
-			} else if (node.name === "field") {
+			} else if (node.name === "field" || node.name === "date") {
 				requiredFields.push(node.values[0]);
 			} else if (node.name === "showIf") {
 				const shouldShow = Object.entries(node.properties || {}).every(
@@ -327,7 +375,8 @@ function App() {
 			</div>
 			<div id="app-body">
 				<div id="form-container">
-					{formIsFilled && <h2>Form</h2> || <h2 style={{ color: "red" }}>Form is not entirely filled</h2>}
+					{formIsFilled ? (<h2>Form</h2>)
+					 : (<h2 style={{ color: "red" }}>Form is not entirely filled</h2>)}
 
 					{schema.output.map((node, i) => (
 						<RenderNode

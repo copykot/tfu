@@ -15,6 +15,7 @@ const template_names = {
     "warning": "First/Final Written Warning",
     "blacklist": "Notice of Blacklist",
     "suspension": "Notice of Suspension",
+	"confirmation": "Practical Confirmation",
 };
 
 const hidden = {
